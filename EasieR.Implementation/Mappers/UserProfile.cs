@@ -15,9 +15,11 @@ namespace EasieR.Implementation.Mappers
             CreateMap<User, UserDto>()
                 .ForMember(dest => dest.Roles,
                 opt => opt.MapFrom(src=>src.UserRoles.Select(x => x.Roles.Id).ToArray())
+                )
+             .ForMember(dest => dest.RolesDto,
+                opt => opt.MapFrom(src => src.UserRoles.Select(x => x.Roles).ToArray())
                 );
             CreateMap<UserDto, User>()
-                .ForMember(dest=>dest.PlaceId, opt => opt.Condition(x=>x.PlaceId != 0))
                 .ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.Roles.Select(x=> new UserRoles { RoleId = x})));
         }
     }

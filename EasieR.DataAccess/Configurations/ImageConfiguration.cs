@@ -13,8 +13,6 @@ namespace EasieR.DataAccess.Configurations
         {
             builder.Property(x => x.Image)
                  .IsRequired();
-            builder.Property(x => x.PlaceId)
-                 .IsRequired();
         }
     }
 }

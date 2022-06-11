@@ -18,16 +18,25 @@ namespace EasieR.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly UseCasesExecutor executor;
+        private readonly IApplicationActor actor;
 
-        public UserController(UseCasesExecutor executor)
+        public UserController(UseCasesExecutor executor, IApplicationActor actor)
         {
             this.executor = executor;
+            this.actor = actor;
         }
         // GET: api/User
         [HttpGet]
         public IActionResult Get([FromQuery] UserSearch search, [FromServices] IGetUsersQuery query)
         {
             return Ok(executor.ExecuteQuery(query, search));
+        }
+
+        // GET: api/User/jwt
+        [HttpGet("jwt")]
+        public IActionResult GetUserFromToken([FromServices] IGetOneUserQuery query)
+        {
+            return Ok(executor.ExecuteQuery(query, actor.Id));
         }
 
         // GET: api/User/5

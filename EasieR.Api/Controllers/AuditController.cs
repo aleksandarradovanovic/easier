@@ -25,7 +25,7 @@ namespace EasieR.Api.Controllers
         }
         // GET: api/Audit
         [HttpGet]
-        public IActionResult Get([FromBody] AuditLogSearch search, [FromServices] IGetAuditLogs query)
+        public IActionResult Get([FromQuery] AuditLogSearch search, [FromServices] IGetAuditLogs query)
         {
             return Ok(executor.ExecuteQuery(query, search));
         }

@@ -12,6 +12,7 @@ namespace EasieR.Application.SearchData
         public DateTime? StartTime { get; set; } = null;
         public DateTime? EndTime { get; set; } = null;
         public string PlaceName { get; set; }
+        public int PlaceId { get; set; }
         public string PlaceType { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

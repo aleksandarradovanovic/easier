@@ -14,19 +14,23 @@ using EasieR.Application.Commands.RolesCommand;
 using EasieR.Application.Commands.UserCommand;
 using EasieR.Application.Queries.AuditQueries;
 using EasieR.Application.Queries.EventQueries;
+using EasieR.Application.Queries.Images;
 using EasieR.Application.Queries.LocationQueries;
 using EasieR.Application.Queries.PlaceQueries;
 using EasieR.Application.Queries.ReservationQueries;
 using EasieR.Application.Queries.RolesQueries;
+using EasieR.Application.Queries.SeatTable;
 using EasieR.Application.Queries.UserQueries;
 using EasieR.DataAccess;
 using EasieR.Implementation.Commands;
 using EasieR.Implementation.Commands.AuditLogCommand;
 using EasieR.Implementation.Commands.EventCommand;
+using EasieR.Implementation.Commands.ImageCommand;
 using EasieR.Implementation.Commands.LocationCommand;
 using EasieR.Implementation.Commands.PlaceCommand;
 using EasieR.Implementation.Commands.ReservationCommand;
 using EasieR.Implementation.Commands.RolesCommand;
+using EasieR.Implementation.Commands.SeatTableCommand;
 using EasieR.Implementation.Commands.UserCommand;
 using EasieR.Implementation.Mappers;
 using EasieR.Implementation.Validations;
@@ -97,6 +101,8 @@ namespace EasieR.Api
             services.AddTransient<IGetOnePlaceQuery, GetOnePlaceCommand>();
             services.AddTransient<IGetPlacesQuery, GetPlacesCommand>();
             services.AddTransient<IDeletePlaceCommand, DeletePlaceCommand>();
+            services.AddTransient<IGetPlaceStaffQuery, GetPlaceStaffCommand>();
+
 
             services.AddTransient<CreatePlaceValidator>();
             services.AddTransient<UpdatePlaceValidator>();
@@ -120,6 +126,10 @@ namespace EasieR.Api
             services.AddTransient<UpdateReservationValidator>();
 
             services.AddTransient<IGetAuditLogs, GetAuditLogsCommand>();
+
+            services.AddTransient<IGetSeatTablesQuery, GetSeatTablesCommand>();
+
+            services.AddTransient<IGetImagesQuery, GetImagesCommand>();
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -182,6 +192,12 @@ namespace EasieR.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(x =>
+            {
+                x.AllowAnyOrigin();
+                x.AllowAnyMethod();
+                x.AllowAnyHeader();
+            });
 
             app.UseRouting();
             app.UseMiddleware<GlobalExceptionHandler>();

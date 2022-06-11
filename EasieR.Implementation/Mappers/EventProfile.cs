@@ -12,9 +12,9 @@ namespace EasieR.Implementation.Mappers
         public EventProfile()
         {
             CreateMap<EventDto, Event>()
-                .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.ImagesDtos));
+                .ForMember(dest => dest.EventImages, opt => opt.MapFrom(src => src.ImagesDtos));
             CreateMap<Event, EventDto>()
-                .ForMember(dest => dest.ImagesDtos, opt => opt.MapFrom(src => src.Images))
+                .ForMember(dest => dest.ImagesDtos, opt => opt.MapFrom(src => src.EventImages))
                 .ForMember(dest => dest.PlaceDto, opt => opt.Ignore());
         }
     }

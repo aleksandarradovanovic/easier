@@ -55,6 +55,10 @@ namespace EasieR.Implementation.Commands.EventCommand
                 {
                     eventItem = eventItem.Where(x => x.EndTime <= search.EndTime);
                 }
+                if (search.PlaceId != 0)
+                {
+                    eventItem = eventItem.Where(x => x.Place.Id == search.PlaceId);
+                }
                 if (search.PlaceName != null)
                 {
                     search.PlaceName = search.PlaceName.ToLower();

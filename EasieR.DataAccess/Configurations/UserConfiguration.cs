@@ -19,6 +19,7 @@ namespace EasieR.DataAccess.Configurations
             builder.Property(x => x.Email).IsRequired().HasMaxLength(40);
             builder.Property(x => x.Password).IsRequired().HasMaxLength(30);
             builder.HasMany(u => u.UserRoles).WithOne(ur => ur.User).HasForeignKey(x =>x.UserId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(u => u.PlaceStaffs).WithOne(ur => ur.User).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
             builder.HasMany(u => u.Reservations).WithOne(ur => ur.User).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
 
         }

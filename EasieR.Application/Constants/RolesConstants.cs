@@ -29,6 +29,8 @@ namespace EasieR.Application.Constants
         public const string SearchPlace = "SEARCH_PLACE";
         public const string UpdatePlace = "UPDATE_PLACE";
         public const string DeletePlace = "DELETE_PLACE";
+        public const string GetPlaceStaff = "GET_PLACE_STAFF";
+
 
         public const string CreateEvent = "CREATE_EVENT";
         public const string GetOneEvent = "GET_ONE_EVENT";
@@ -43,6 +45,11 @@ namespace EasieR.Application.Constants
         public const string DeleteReservation = "DELETE_RESERVATION";
 
         public const string GetAuditLogs = "GET_AUDIT_LOGS";
+
+        public const string GetSeatTables = "GET_SEAT_TABLES";
+
+        public const string GetImages= "GET_IMAGES";
+
 
 
     }

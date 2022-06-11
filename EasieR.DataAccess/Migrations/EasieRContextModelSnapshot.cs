@@ -128,8 +128,14 @@ namespace EasieR.DataAccess.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PlaceId")
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PlaceId")
                         .HasColumnType("int");
+
+                    b.Property<decimal?>("Size")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("isActive")
                         .HasColumnType("bit");
@@ -211,8 +217,9 @@ namespace EasieR.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("EndWorkingTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("EndWorkingTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
@@ -225,8 +232,9 @@ namespace EasieR.DataAccess.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<DateTime>("StartWorkingTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("StartWorkingTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -244,6 +252,48 @@ namespace EasieR.DataAccess.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Place");
+                });
+
+            modelBuilder.Entity("EasieR.Domain.PlaceStaff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PlaceId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PlaceStaff");
                 });
 
             modelBuilder.Entity("EasieR.Domain.Reservation", b =>
@@ -452,9 +502,6 @@ namespace EasieR.DataAccess.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlaceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
@@ -470,8 +517,6 @@ namespace EasieR.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlaceId");
 
                     b.HasIndex("UserName")
                         .IsUnique();
@@ -508,15 +553,14 @@ namespace EasieR.DataAccess.Migrations
             modelBuilder.Entity("EasieR.Domain.Images", b =>
                 {
                     b.HasOne("EasieR.Domain.Event", "Event")
-                        .WithMany("Images")
+                        .WithMany("EventImages")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("EasieR.Domain.Place", "Place")
                         .WithMany("Images")
                         .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Event");
 
@@ -532,6 +576,25 @@ namespace EasieR.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("EasieR.Domain.PlaceStaff", b =>
+                {
+                    b.HasOne("EasieR.Domain.Place", "Place")
+                        .WithMany("Staff")
+                        .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EasieR.Domain.User", "User")
+                        .WithMany("PlaceStaffs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Place");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EasieR.Domain.Reservation", b =>
@@ -591,16 +654,6 @@ namespace EasieR.DataAccess.Migrations
                     b.Navigation("SeatTable");
                 });
 
-            modelBuilder.Entity("EasieR.Domain.User", b =>
-                {
-                    b.HasOne("EasieR.Domain.Place", "Place")
-                        .WithMany("Staff")
-                        .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Place");
-                });
-
             modelBuilder.Entity("EasieR.Domain.UserRoles", b =>
                 {
                     b.HasOne("EasieR.Domain.Roles", "Roles")
@@ -622,7 +675,7 @@ namespace EasieR.DataAccess.Migrations
 
             modelBuilder.Entity("EasieR.Domain.Event", b =>
                 {
-                    b.Navigation("Images");
+                    b.Navigation("EventImages");
 
                     b.Navigation("Reservations");
                 });
@@ -655,6 +708,8 @@ namespace EasieR.DataAccess.Migrations
 
             modelBuilder.Entity("EasieR.Domain.User", b =>
                 {
+                    b.Navigation("PlaceStaffs");
+
                     b.Navigation("Reservations");
 
                     b.Navigation("UserRoles");

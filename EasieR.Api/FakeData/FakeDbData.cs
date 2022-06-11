@@ -177,8 +177,8 @@ namespace EasieR.Api.FakeData
                 Name = "Navigator bar",
                 Type = "restaurant",
                 Description = "Bar with drink and food",
-                StartWorkingTime = new DateTime(2011, 6, 10),
-                EndWorkingTime = new DateTime(2011, 6, 10),
+                StartWorkingTime ="08:00",
+                EndWorkingTime = "16:00",
                 Location = new Location
                 {
                     Country = "Serbia",
@@ -217,8 +217,8 @@ namespace EasieR.Api.FakeData
                 Name = "Kombank dvorana",
                 Type = "cinema",
                 Description = "Cinema and theatre",
-                StartWorkingTime = new DateTime(2011, 6, 10),
-                EndWorkingTime = new DateTime(2011, 6, 10),
+             StartWorkingTime ="08:00",
+                EndWorkingTime = "16:00",
                 Location = new Location
                 {
                     Country = "Serbia",

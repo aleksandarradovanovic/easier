@@ -12,7 +12,7 @@ namespace Nedelja7.Api.Core
 {
     public class GlobalExceptionHandler
     {
-        private readonly RequestDelegate _next;
+        private readonly RequestDelegate _next;  
 
         public GlobalExceptionHandler(RequestDelegate next)
         {

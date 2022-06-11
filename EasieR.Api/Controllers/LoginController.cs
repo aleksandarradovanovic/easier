@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EasieR.Api.Core;
 using EasieR.Application.DataTransfer;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,9 +45,15 @@ namespace EasieR.Api.Controllers
             }
             var jwt = jwtManager.MakeToken(loginDto.UserName, loginDto.Password);
             if(jwt == null) {
-                return Ok(new { message = "Login failed. Bad credentials" });
+                return StatusCode(500,new ResultDto { 
+                message = "Bad credentials"
+                });
             }
-            return Ok(new { message = "Login success", token = jwt});
+            return Ok(new ResultDto
+            {
+                message = "Login success",
+                data = jwt
+            });
         }
 
         // PUT: api/Login/5

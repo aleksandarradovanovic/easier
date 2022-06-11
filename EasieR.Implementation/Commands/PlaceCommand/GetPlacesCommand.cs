@@ -70,6 +70,10 @@ namespace EasieR.Implementation.Commands.PlaceCommand
                     search.StreetAndNumber = search.StreetAndNumber.ToLower();
                     places = places.Where(x => x.Location.StreetAndNumber.ToLower().Contains(search.StreetAndNumber));
                 }
+                if (search.UserId != 0)
+                {
+                    places = places.Where(x => x.Staff.Any(s => s.UserId == search.UserId));
+                }
                 var skipCount = search.PerPage * (search.Page - 1);
                 var response = new PagedResponse<PlaceDto>
                 {

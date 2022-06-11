@@ -38,24 +38,68 @@ namespace EasieR.Implementation.Commands.PlaceCommand
                     throw new EntityNotFoundException(placeDto.Id, "Place");
                 }
                 _validator.ValidateAndThrow(placeDto);
-                placeForUpdate.Name = placeDto.Name;
-                placeForUpdate.Type = placeDto.Type;
-                placeForUpdate.Description = placeDto.Description;
-                placeForUpdate.StartWorkingTime = placeDto.StartWorkingTime;
-                placeForUpdate.EndWorkingTime = placeDto.EndWorkingTime;
-                placeForUpdate.Location.Country = placeDto.LocationDto.Country;
-                placeForUpdate.Location.City = placeDto.LocationDto.City;
-                placeForUpdate.Location.StreetAndNumber = placeDto.LocationDto.StreetAndNumber;
-                placeForUpdate.Location.Latitude = placeDto.LocationDto.Latitude;
-                placeForUpdate.Location.Longitude = placeDto.LocationDto.Longitude;
+                if (placeForUpdate.Name != null)
+                {
+                    placeForUpdate.Name = placeDto.Name;
+                }
+                if (placeForUpdate.Type != null)
+                {
+                    placeForUpdate.Type = placeDto.Type;
+                }
+                if (placeForUpdate.Description != null)
+                {
+                    placeForUpdate.Description = placeDto.Description;
+                }
+                if (placeForUpdate.StartWorkingTime != null)
+                {
+                    placeForUpdate.StartWorkingTime = placeDto.StartWorkingTime;
+                }
+                if (placeForUpdate.EndWorkingTime != null)
+                {
+                    placeForUpdate.EndWorkingTime = placeDto.EndWorkingTime;
+                }
+                if (placeForUpdate.Location != null)
+                {
+                    placeForUpdate.Location.Country = placeDto.LocationDto.Country;
+                    placeForUpdate.Location.City = placeDto.LocationDto.City;
+                    placeForUpdate.Location.StreetAndNumber = placeDto.LocationDto.StreetAndNumber;
+                    placeForUpdate.Location.Latitude = placeDto.LocationDto.Latitude;
+                    placeForUpdate.Location.Longitude = placeDto.LocationDto.Longitude;
+                }
                 if (placeDto.SeatTableDtos != null && placeDto.SeatTableDtos.Count > 0)
                 {
+                    var seatTablesToRemove = _easieRContext.SeatTable.AsQueryable().Where(x => x.PlaceId == placeDto.Id);
+                    if (seatTablesToRemove != null)
+                    {
+                        foreach (var item in seatTablesToRemove)
+                        {
+                            _easieRContext.SeatTable.Remove(item);
+                        }
+                    }
                     placeForUpdate.SeatTables = placeDto.SeatTableDtos.Select(x => new SeatTable
                     {
                         Type = x.Type,
                         Number = x.Number,
                         isAvailable = x.isAvailable || true
-                    }).ToArray();
+                    }).ToList();
+                }
+                if (placeDto.ImagesDtos != null && placeDto.ImagesDtos.Count > 0)
+                {
+                    var imagesToRemove = _easieRContext.Images.AsQueryable().Where(x => x.PlaceId == placeDto.Id);
+                    if(imagesToRemove != null)
+                    {
+                        foreach (var item in imagesToRemove)
+                        {
+                            _easieRContext.Images.Remove(item);
+                        }
+                    }
+                   
+                   placeForUpdate.Images = placeDto.ImagesDtos.Select(x => new Images
+                    {
+                        Image = x.Image,
+                        Name = x.Name,
+                        Size = x.Size
+                    }).ToList();
                 }
                 _easieRContext.Place.Update(placeForUpdate);
                 _easieRContext.SaveChanges();

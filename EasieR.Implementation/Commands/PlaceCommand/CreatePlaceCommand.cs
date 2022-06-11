@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EasieR.Application;
 using EasieR.Application.Commands.PlaceCommand;
 using EasieR.Application.Constants;
 using EasieR.Application.DataTransfer;
@@ -18,12 +19,15 @@ namespace EasieR.Implementation.Commands.PlaceCommand
         private readonly EasieRContext _easieRContext;
         private readonly IMapper _mapper;
         private readonly CreatePlaceValidator _validator;
+        private readonly IApplicationActor _actor;
 
-        public CreatePlaceCommand(EasieRContext easieRContext, CreatePlaceValidator validator, IMapper mapper)
+
+        public CreatePlaceCommand(EasieRContext easieRContext, CreatePlaceValidator validator, IMapper mapper, IApplicationActor actor)
         {
             _easieRContext = easieRContext;
             _validator = validator;
             _mapper = mapper;
+            _actor = actor;
         }
         public int Id => 16;
 
@@ -31,6 +35,7 @@ namespace EasieR.Implementation.Commands.PlaceCommand
 
         public void Execute(PlaceDto placeDto)
         {
+            placeDto.UserId = _actor.Id;
             try
             {
                 _validator.ValidateAndThrow(placeDto);

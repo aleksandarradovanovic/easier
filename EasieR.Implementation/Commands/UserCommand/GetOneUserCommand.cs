@@ -20,7 +20,7 @@ namespace EasieR.Implementation.Commands.UserCommand
         {
             _easieRContext = easieRContext;
             _mapper = mapper;
-
+            
         }
         public int Id => 2;
 

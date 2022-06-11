@@ -19,6 +19,8 @@ namespace EasieR.DataAccess
             modelBuilder.ApplyConfiguration(new PlaceConfiguration());
             modelBuilder.ApplyConfiguration(new ReservationConfiguration());
             modelBuilder.ApplyConfiguration(new ImageConfiguration());
+            modelBuilder.ApplyConfiguration(new PlaceStaffConfiguration());
+
 
             modelBuilder.Entity<UserRoles>().HasKey(x => new { x.UserId, x.RoleId });
             modelBuilder.Entity<SeatTableReservation>().HasKey(x => new { x.ReservationId, x.SeatTableId });
@@ -60,6 +62,7 @@ namespace EasieR.DataAccess
         public DbSet<Location> Location { get; set; }
         public DbSet<SeatTable> SeatTable { get; set; }
         public DbSet<Place> Place { get; set; }
+        public DbSet<PlaceStaff> PlaceStaff { get; set; }
         public DbSet<Event> Event { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Images> Images { get; set; }

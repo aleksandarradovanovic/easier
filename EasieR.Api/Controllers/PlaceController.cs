@@ -17,15 +17,31 @@ namespace EasieR.Api.Controllers
     public class PlaceController : ControllerBase
     {
         private readonly UseCasesExecutor executor;
+        private readonly IApplicationActor actor;
 
-        public PlaceController(UseCasesExecutor executor)
+
+        public PlaceController(UseCasesExecutor executor, IApplicationActor actor)
         {
             this.executor = executor;
+            this.actor = actor;
         }
         // GET: api/Place
         [HttpGet]
         public IActionResult Get([FromQuery] PlaceSearch search, [FromServices] IGetPlacesQuery query)
         {
+            return Ok(executor.ExecuteQuery(query, search));
+        }
+        // GET: api/Place/staff
+        [HttpGet("staff")]
+        public IActionResult GetStaff([FromQuery] PlaceStaffSearch search, [FromServices] IGetPlaceStaffQuery query)
+        {
+            return Ok(executor.ExecuteQuery(query, search));
+        }
+        // GET: api/Place/user
+        [HttpGet("user")]
+        public IActionResult GetPlaceForUser([FromQuery] PlaceSearch search, [FromServices] IGetPlacesQuery query)
+        {
+            search.UserId = actor.Id;
             return Ok(executor.ExecuteQuery(query, search));
         }
 
@@ -41,7 +57,10 @@ namespace EasieR.Api.Controllers
         public IActionResult Post([FromBody] PlaceDto placeDto, [FromServices] ICreatePlaceCommand command)
         {
             executor.ExecuteCommand(command, placeDto);
-            return StatusCode(201, new { message = "Place created." });
+            return StatusCode(201, new ResultDto
+            {
+                message = "Place created"
+            });
         }
 
         // PUT: api/Place/5
@@ -50,7 +69,10 @@ namespace EasieR.Api.Controllers
         {
             placeDto.Id = id;
             executor.ExecuteCommand(command, placeDto);
-            return Ok();
+            return Ok(new ResultDto
+            {
+                message = "Place updated"
+            });
         } 
         
         // DELETE: api/ApiWithActions/5
