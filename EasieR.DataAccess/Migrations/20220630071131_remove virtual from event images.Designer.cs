@@ -4,14 +4,16 @@ using EasieR.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasieR.DataAccess.Migrations
 {
     [DbContext(typeof(EasieRContext))]
-    partial class EasieRContextModelSnapshot : ModelSnapshot
+    [Migration("20220630071131_remove virtual from event images")]
+    partial class removevirtualfromeventimages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1412,7 +1414,7 @@ namespace EasieR.DataAccess.Migrations
                     b.HasOne("EasieR.Domain.Event", "Event")
                         .WithMany("EventImages")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("EasieR.Domain.Place", "Place")
                         .WithMany("Images")

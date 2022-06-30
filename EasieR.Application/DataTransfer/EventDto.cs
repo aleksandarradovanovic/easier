@@ -17,5 +17,6 @@ namespace EasieR.Application.DataTransfer
         public PlaceDto PlaceDto { get; set; }
         public virtual ICollection<ReservationDto> ReservationDtos { get; set; }
         public virtual ICollection<ImagesDto> ImagesDtos { get; set; }
+        public virtual string Image { get; set; }
     }
 }

@@ -132,14 +132,15 @@ namespace EasieR.Api
             services.AddTransient<IGetImagesQuery, GetImagesCommand>();
 
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             services.AddTransient<IApplicationActor>(x => {
                 var accessor = x.GetService<IHttpContextAccessor>();
                 var user = accessor.HttpContext.User;
 
                 if (user.FindFirst("ActorData") == null)
                 {
-                    throw new InvalidOperationException("Actor data doesnt exist in token.");
+                    var anActor = new UnautorizedPublicActor();
+                    return anActor;
                 }
 
                 var actorString = user.FindFirst("ActorData").Value;

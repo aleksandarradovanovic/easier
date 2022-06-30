@@ -30,7 +30,7 @@ namespace EasieR.Implementation.Commands.UserCommand
         {
             try
             {
-                var user = _easieRContext.Users.Include(x=>x.UserRoles).ThenInclude(x=>x.Roles)
+                var user = _easieRContext.Users.Include(x => x.Actor).ThenInclude(x => x.ActorRoles).ThenInclude(x => x.Roles)
                     .FirstOrDefault(x => !x.isDeleted && x.Id == id);
                 if(user == null)
                 {

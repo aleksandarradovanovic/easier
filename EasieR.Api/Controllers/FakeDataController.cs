@@ -41,8 +41,6 @@ namespace EasieR.Api.Controllers
                 Roles = x
             });
 
-            users.First().UserRoles = userRoles.ToList();
-            users.Last().UserRoles = userRoles2.ToList();
             easieRContext.Users.AddRange(users);
 
             var places = fakeDbData.CreatePlace();

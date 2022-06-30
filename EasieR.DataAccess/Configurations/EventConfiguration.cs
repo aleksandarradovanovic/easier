@@ -28,7 +28,7 @@ namespace EasieR.DataAccess.Configurations
             .IsRequired();
 
             builder.HasMany(r => r.Reservations).WithOne(e => e.Event).HasForeignKey(x => x.EventId).OnDelete(DeleteBehavior.Restrict);
-            builder.HasMany(i => i.EventImages).WithOne(e => e.Event).HasForeignKey(x => x.EventId).OnDelete(DeleteBehavior.SetNull);
+            builder.HasMany(i => i.EventImages).WithOne(e => e.Event).HasForeignKey(x => x.EventId).OnDelete(DeleteBehavior.Restrict);
 
         }
     }

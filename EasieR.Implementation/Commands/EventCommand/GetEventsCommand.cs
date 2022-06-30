@@ -31,7 +31,7 @@ namespace EasieR.Implementation.Commands.EventCommand
         {
             try
             {
-                var eventItem = _easieRContext.Event.Include(x => x.Reservations).Include(x => x.Place).ThenInclude(x => x.Location).AsQueryable().Where(x => !x.isDeleted);
+                var eventItem = _easieRContext.Event.Include(x => x.Reservations).Include(x=>x.EventImages).Include(x => x.Place).ThenInclude(x => x.Location).AsQueryable().Where(x => !x.isDeleted);
                 if (search.Name != null)
                 {
                     search.Name = search.Name.ToLower();

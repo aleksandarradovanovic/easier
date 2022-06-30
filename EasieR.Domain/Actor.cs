@@ -4,11 +4,11 @@ using System.Text;
 
 namespace EasieR.Domain
 {
-    public class Roles : Entity
+    public class Actor : Entity
     {
         public string Name { get; set; }
         public virtual ICollection<ActorRoles> ActorRoles { get; set; } = new HashSet<ActorRoles>();
-
+        public virtual ICollection<User> Users { get; set; } = new HashSet<User>();
 
     }
 }

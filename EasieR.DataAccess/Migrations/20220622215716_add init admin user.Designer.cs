@@ -4,14 +4,16 @@ using EasieR.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasieR.DataAccess.Migrations
 {
     [DbContext(typeof(EasieRContext))]
-    partial class EasieRContextModelSnapshot : ModelSnapshot
+    [Migration("20220622215716_add init admin user")]
+    partial class addinitadminuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,14 +76,6 @@ namespace EasieR.DataAccess.Migrations
                             Name = "PLACE",
                             isActive = false,
                             isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "PUBLIC_UNAUTORIZED",
-                            isActive = false,
-                            isDeleted = false
                         });
                 });
 
@@ -117,11 +111,6 @@ namespace EasieR.DataAccess.Migrations
                         },
                         new
                         {
-                            ActorId = 4,
-                            RoleId = 1
-                        },
-                        new
-                        {
                             ActorId = 1,
                             RoleId = 2
                         },
@@ -317,11 +306,6 @@ namespace EasieR.DataAccess.Migrations
                         },
                         new
                         {
-                            ActorId = 4,
-                            RoleId = 17
-                        },
-                        new
-                        {
                             ActorId = 1,
                             RoleId = 18
                         },
@@ -333,11 +317,6 @@ namespace EasieR.DataAccess.Migrations
                         new
                         {
                             ActorId = 3,
-                            RoleId = 18
-                        },
-                        new
-                        {
-                            ActorId = 4,
                             RoleId = 18
                         },
                         new
@@ -387,11 +366,6 @@ namespace EasieR.DataAccess.Migrations
                         },
                         new
                         {
-                            ActorId = 4,
-                            RoleId = 22
-                        },
-                        new
-                        {
                             ActorId = 1,
                             RoleId = 23
                         },
@@ -403,11 +377,6 @@ namespace EasieR.DataAccess.Migrations
                         new
                         {
                             ActorId = 3,
-                            RoleId = 23
-                        },
-                        new
-                        {
-                            ActorId = 4,
                             RoleId = 23
                         },
                         new
@@ -447,11 +416,6 @@ namespace EasieR.DataAccess.Migrations
                         },
                         new
                         {
-                            ActorId = 4,
-                            RoleId = 26
-                        },
-                        new
-                        {
                             ActorId = 1,
                             RoleId = 27
                         },
@@ -463,11 +427,6 @@ namespace EasieR.DataAccess.Migrations
                         new
                         {
                             ActorId = 3,
-                            RoleId = 27
-                        },
-                        new
-                        {
-                            ActorId = 4,
                             RoleId = 27
                         },
                         new
@@ -502,11 +461,6 @@ namespace EasieR.DataAccess.Migrations
                         },
                         new
                         {
-                            ActorId = 4,
-                            RoleId = 29
-                        },
-                        new
-                        {
                             ActorId = 1,
                             RoleId = 30
                         },
@@ -518,11 +472,6 @@ namespace EasieR.DataAccess.Migrations
                         new
                         {
                             ActorId = 3,
-                            RoleId = 30
-                        },
-                        new
-                        {
-                            ActorId = 4,
                             RoleId = 30
                         },
                         new
@@ -1412,7 +1361,7 @@ namespace EasieR.DataAccess.Migrations
                     b.HasOne("EasieR.Domain.Event", "Event")
                         .WithMany("EventImages")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("EasieR.Domain.Place", "Place")
                         .WithMany("Images")

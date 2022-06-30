@@ -14,7 +14,7 @@ namespace EasieR.DataAccess.Configurations
             builder.Property(x => x.Name)
                 .HasMaxLength(20)
                 .IsRequired();
-            builder.HasMany(r => r.UserRoles).WithOne(ur => ur.Roles).HasForeignKey(x => x.RoleId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(r => r.ActorRoles).WithOne(ur => ur.Roles).HasForeignKey(x => x.RoleId).OnDelete(DeleteBehavior.Restrict);
 
 
         }

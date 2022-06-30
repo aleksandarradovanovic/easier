@@ -2,6 +2,7 @@
 using EasieR.Application.Constants;
 using EasieR.Application.DataTransfer;
 using EasieR.DataAccess;
+using EasieR.Domain;
 using EasieR.Implementation.Validations.EventValidations;
 using FluentValidation;
 using Nedelja7.Application.Exceptions;
@@ -41,6 +42,15 @@ namespace EasieR.Implementation.Commands.EventCommand
                     eventForUpdate.StartTime = eventDto.StartTime;
                     eventForUpdate.EndTime = eventDto.EndTime;
                     eventForUpdate.PlaceId = eventDto.PlaceId;
+                if(eventDto.ImagesDtos != null && eventDto.ImagesDtos.Count > 0)
+                    {
+                    eventForUpdate.EventImages = eventDto.ImagesDtos.Select(x => new Images
+                    {
+                        Name = x.Name,
+                        Image = x.Image,
+                        Size = x.Size
+                    }).ToArray();
+                    }
                 _easieRContext.Event.Update(eventForUpdate);
                 _easieRContext.SaveChanges();
             }

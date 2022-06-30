@@ -29,7 +29,7 @@ namespace EasieR.Implementation.Commands.UserCommand
         {
             try
             {
-                var users = _easieRContext.Users.Include(x => x.UserRoles).ThenInclude(x => x.Roles).AsQueryable().Where(x => !x.isDeleted);
+                var users = _easieRContext.Users.Include(x => x.Actor).ThenInclude(x => x.ActorRoles).ThenInclude(x => x.Roles).AsQueryable().Where(x => !x.isDeleted);
                 if (search.FirstName != null)
                 {
                     search.FirstName = search.FirstName.ToLower();

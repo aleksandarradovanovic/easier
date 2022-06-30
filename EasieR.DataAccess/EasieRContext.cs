@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 namespace EasieR.DataAccess
 {
     public class EasieRContext : DbContext
@@ -12,6 +11,7 @@ namespace EasieR.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
+            modelBuilder.ApplyConfiguration(new ActorConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new LocationConfiguration());
             modelBuilder.ApplyConfiguration(new SeatTableConfiguration());
@@ -21,9 +21,12 @@ namespace EasieR.DataAccess
             modelBuilder.ApplyConfiguration(new ImageConfiguration());
             modelBuilder.ApplyConfiguration(new PlaceStaffConfiguration());
 
-
-            modelBuilder.Entity<UserRoles>().HasKey(x => new { x.UserId, x.RoleId });
+            modelBuilder.Entity<ActorRoles>().HasKey(x => new { x.ActorId, x.RoleId });
             modelBuilder.Entity<SeatTableReservation>().HasKey(x => new { x.ReservationId, x.SeatTableId });
+            modelBuilder.Entity<Actor>().HasData(InitData.CreateActors());
+            modelBuilder.Entity<Roles>().HasData(InitData.CreateRoles());
+            modelBuilder.Entity<ActorRoles>().HasData(InitData.CreateActorRoles());
+            modelBuilder.Entity<User>().HasData(InitData.CreateAdminUser());
 
 
         }
@@ -67,6 +70,7 @@ namespace EasieR.DataAccess
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Images> Images { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
+        public DbSet<Actor> Actor { get; set; }
 
 
     }

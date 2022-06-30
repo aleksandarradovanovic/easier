@@ -3,6 +3,7 @@ using EasieR.Application.DataTransfer;
 using EasieR.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EasieR.Implementation.Mappers
@@ -15,6 +16,7 @@ namespace EasieR.Implementation.Mappers
                 .ForMember(dest => dest.EventImages, opt => opt.MapFrom(src => src.ImagesDtos));
             CreateMap<Event, EventDto>()
                 .ForMember(dest => dest.ImagesDtos, opt => opt.MapFrom(src => src.EventImages))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.EventImages.FirstOrDefault().Image))
                 .ForMember(dest => dest.PlaceDto, opt => opt.Ignore());
         }
     }

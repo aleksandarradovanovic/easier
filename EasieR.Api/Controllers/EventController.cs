@@ -13,22 +13,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EasieR.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EventController : ControllerBase
     {
         private readonly UseCasesExecutor executor;
-        private readonly IApplicationActor actor;
 
-
-        public EventController(UseCasesExecutor executor, IApplicationActor actor)
+        public EventController(UseCasesExecutor executor)
         {
             this.executor = executor;
-            this.actor = actor;
         }
         // GET: api/Event
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get([FromQuery] EventSearch search, [FromServices] IGetEventsQuery query)
         {
             return Ok(executor.ExecuteQuery(query, search));

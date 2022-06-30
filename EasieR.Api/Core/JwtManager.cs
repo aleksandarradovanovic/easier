@@ -25,7 +25,7 @@ namespace EasieR.Api.Core
         {
             try
             {
-                var user = _context.Users.Include(u => u.UserRoles).ThenInclude(x => x.Roles)
+                var user = _context.Users.Include(u => u.Actor).ThenInclude(x => x.ActorRoles).ThenInclude(x => x.Roles)
                     .FirstOrDefault(x => x.UserName == username && x.Password == password);
 
                 if (user == null)
@@ -36,7 +36,7 @@ namespace EasieR.Api.Core
                 var actor = new JwtActor
                 {
                     Id = user.Id,
-                    AllowedUsecases = user.UserRoles.Select(x => x.Roles.Name),
+                    AllowedUsecases = user.Actor.ActorRoles.Select(x => x.Roles.Name),
                     Identity = user.UserName
                 };
 

@@ -4,14 +4,16 @@ using EasieR.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasieR.DataAccess.Migrations
 {
     [DbContext(typeof(EasieRContext))]
-    partial class EasieRContextModelSnapshot : ModelSnapshot
+    [Migration("20220622213337_add init actor roles data")]
+    partial class addinitactorrolesdata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,14 +76,6 @@ namespace EasieR.DataAccess.Migrations
                             Name = "PLACE",
                             isActive = false,
                             isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "PUBLIC_UNAUTORIZED",
-                            isActive = false,
-                            isDeleted = false
                         });
                 });
 
@@ -117,11 +111,6 @@ namespace EasieR.DataAccess.Migrations
                         },
                         new
                         {
-                            ActorId = 4,
-                            RoleId = 1
-                        },
-                        new
-                        {
                             ActorId = 1,
                             RoleId = 2
                         },
@@ -134,446 +123,6 @@ namespace EasieR.DataAccess.Migrations
                         {
                             ActorId = 3,
                             RoleId = 2
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 3
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 3
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 3
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 4
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 4
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 4
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 5
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 5
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 5
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 6
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 6
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 7
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 7
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 8
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 8
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 8
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 9
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 9
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 10
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 10
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 11
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 11
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 12
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 12
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 13
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 13
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 13
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 14
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 14
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 15
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 15
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 16
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 16
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 17
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 17
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 17
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            RoleId = 17
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 18
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 18
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 18
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            RoleId = 18
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 19
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 19
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 20
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 20
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 21
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 21
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 22
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 22
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 22
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            RoleId = 22
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 23
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 23
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 23
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            RoleId = 23
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 24
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 24
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 25
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 25
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 26
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 26
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 26
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            RoleId = 26
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 27
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 27
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 27
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            RoleId = 27
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 28
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 28
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 28
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 29
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 29
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 29
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            RoleId = 29
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 30
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 30
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 30
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            RoleId = 30
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 31
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 32
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 32
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 32
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 34
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 34
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 34
-                        },
-                        new
-                        {
-                            ActorId = 1,
-                            RoleId = 33
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            RoleId = 33
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            RoleId = 33
                         });
                 });
 
@@ -1202,30 +751,6 @@ namespace EasieR.DataAccess.Migrations
                             Name = "GET_AUDIT_LOGS",
                             isActive = false,
                             isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 32,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GET_PLACE_STAFF",
-                            isActive = false,
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 33,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GET_SEAT_TABLES",
-                            isActive = false,
-                            isDeleted = false
-                        },
-                        new
-                        {
-                            Id = 34,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GET_IMAGES",
-                            isActive = false,
-                            isDeleted = false
                         });
                 });
 
@@ -1359,22 +884,6 @@ namespace EasieR.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ActorId = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "admin@root",
-                            FirstName = "admin",
-                            LastName = "admin",
-                            Password = "admin123",
-                            UserName = "admin",
-                            isActive = false,
-                            isDeleted = false
-                        });
                 });
 
             modelBuilder.Entity("EasieR.Domain.ActorRoles", b =>
@@ -1412,7 +921,7 @@ namespace EasieR.DataAccess.Migrations
                     b.HasOne("EasieR.Domain.Event", "Event")
                         .WithMany("EventImages")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("EasieR.Domain.Place", "Place")
                         .WithMany("Images")
