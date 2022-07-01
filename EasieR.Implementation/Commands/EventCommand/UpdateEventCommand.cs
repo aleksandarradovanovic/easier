@@ -42,7 +42,25 @@ namespace EasieR.Implementation.Commands.EventCommand
                     eventForUpdate.StartTime = eventDto.StartTime;
                     eventForUpdate.EndTime = eventDto.EndTime;
                     eventForUpdate.PlaceId = eventDto.PlaceId;
-                if(eventDto.ImagesDtos != null && eventDto.ImagesDtos.Count > 0)
+                if (eventDto.ImagesDtos != null && eventDto.ImagesDtos.Count > 0)
+                {
+                    var imagesToRemove = _easieRContext.Images.AsQueryable().Where(x => x.EventId == eventDto.Id);
+                    if (imagesToRemove != null)
+                    {
+                        foreach (var item in imagesToRemove)
+                        {
+                            _easieRContext.Images.Remove(item);
+                        }
+                    }
+
+                    eventForUpdate.EventImages = eventDto.ImagesDtos.Select(x => new Images
+                    {
+                        Image = x.Image,
+                        Name = x.Name,
+                        Size = x.Size
+                    }).ToList();
+                }
+                if (eventDto.ImagesDtos != null && eventDto.ImagesDtos.Count > 0)
                     {
                     eventForUpdate.EventImages = eventDto.ImagesDtos.Select(x => new Images
                     {

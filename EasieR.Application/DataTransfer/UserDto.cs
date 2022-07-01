@@ -18,6 +18,7 @@ namespace EasieR.Application.DataTransfer
         public string PhoneNumber { get; set; }
         public int PlaceId { get; set; }
         public int ActorId { get; set; }
+        public string ActorName { get; set; }
         public virtual ICollection<RolesDto> RolesDto { get; set; }
     }
 }

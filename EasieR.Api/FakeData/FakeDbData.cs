@@ -301,12 +301,9 @@ namespace EasieR.Api.FakeData
             {
                 new Reservation
                 {
-                    Type = "Card",
                     NameOn = "Pera",
-                    Remark = "Some remark",
                     Status = "CREATED",
-                    NumberOfGuests = 2,
-                    Price = 100
+                    NumberOfGuests = 2
                 }
             };
             return reservations;

@@ -14,12 +14,12 @@ namespace EasieR.Implementation.Mappers
         {
             CreateMap<ReservationDto, Reservation>();
             CreateMap<Reservation, ReservationDto>()
-            .ForMember(dest => dest.CompleteAddress, opt => opt.MapFrom(src => src.Place.Location.Country + ", " + src.Place.Location.City + ", " + src.Place.Location.StreetAndNumber))
+            .ForMember(dest => dest.CompleteAddress, opt => opt.MapFrom(src => src.ReservationType.Event.Place.Location.Country + ", " + src.ReservationType.Event.Place.Location.City + ", " + src.ReservationType.Event.Place.Location.StreetAndNumber))
             .ForMember(dest=> dest.SeatTableDtos, opt => opt.MapFrom(src=>src.SeatTableReservation.Select(x => new SeatTableDto
             {
                 Number = x.SeatTable.Number
             })))
-            .ForMember(dest=> dest.QRCodeContent, opt=>opt.MapFrom(src => System.Text.Encoding.UTF8.GetBytes(src.NameOn + ";" + src.Event.Name)));
+            .ForMember(dest=> dest.QRCodeContent, opt=>opt.MapFrom(src => System.Text.Encoding.UTF8.GetBytes(src.NameOn + ";" + src.ReservationType.Event.Name)));
             
         }
     }

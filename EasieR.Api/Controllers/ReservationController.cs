@@ -38,9 +38,9 @@ namespace EasieR.Api.Controllers
 
         // POST: api/Reservation
         [HttpPost]
-        public IActionResult Post([FromBody] ReservationDto reservationDto, [FromServices] ICreateReservationCommand command)
+        public IActionResult Post([FromBody] ReservationDtos reservationDtos, [FromServices] ICreateReservationCommand command)
         {
-            executor.ExecuteCommand(command, reservationDto);
+            executor.ExecuteCommand(command, reservationDtos);
             return StatusCode(201, new { message = "Reservation created" });
         }
 

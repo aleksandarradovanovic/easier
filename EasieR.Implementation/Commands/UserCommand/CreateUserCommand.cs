@@ -38,7 +38,7 @@ namespace EasieR.Implementation.Commands
                 User user = _mapper.Map<User>(userDto);
                 _easieRContext.Users.Add(user);
                 _easieRContext.SaveChanges();
-                var currentUserId = _easieRContext.Users.FirstOrDefault(x => x.UserName == userDto.UserName).Id;
+       /*         var currentUserId = _easieRContext.Users.FirstOrDefault(x => x.UserName == userDto.UserName).Id;
                 MailMessage mailmessage = new MailMessage();
                 mailmessage.To.Add(new MailAddress(userDto.Email));
                 mailmessage.From = new MailAddress("acaca93@gmail.com");
@@ -52,7 +52,7 @@ namespace EasieR.Implementation.Commands
                 smtpclient.Port = 587;
                 smtpclient.EnableSsl = true;
                 smtpclient.Host = "smtp.gmail.com";
-                smtpclient.Send(mailmessage);
+                smtpclient.Send(mailmessage);*/
             }
             catch (Exception ex)
             {

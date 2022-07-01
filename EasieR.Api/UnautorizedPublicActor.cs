@@ -25,6 +25,7 @@ namespace EasieR.Api
         public string Identity => "anonymous";
 
         public IEnumerable<string> AllowedUsecases => new string[] { 
+        DataConstants.CreateUser,
         DataConstants.SearchEvent,
         DataConstants.GetOneEvent
         };

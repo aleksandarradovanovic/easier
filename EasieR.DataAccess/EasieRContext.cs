@@ -18,6 +18,7 @@ namespace EasieR.DataAccess
             modelBuilder.ApplyConfiguration(new EventConfiguration());
             modelBuilder.ApplyConfiguration(new PlaceConfiguration());
             modelBuilder.ApplyConfiguration(new ReservationConfiguration());
+            modelBuilder.ApplyConfiguration(new ReservationTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ImageConfiguration());
             modelBuilder.ApplyConfiguration(new PlaceStaffConfiguration());
 
@@ -68,6 +69,7 @@ namespace EasieR.DataAccess
         public DbSet<PlaceStaff> PlaceStaff { get; set; }
         public DbSet<Event> Event { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
+        public DbSet<ReservationType> ReservationType { get; set; }
         public DbSet<Images> Images { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
         public DbSet<Actor> Actor { get; set; }

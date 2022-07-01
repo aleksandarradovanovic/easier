@@ -31,7 +31,7 @@ namespace EasieR.Implementation.Commands.ReservationCommand
         {
             try
             {
-                var reservations = _easieRContext.Reservation.Include(x => x.Event).Include(x => x.User).Include(x => x.Place).ThenInclude(x => x.Location).Include(x=>x.SeatTableReservation).ThenInclude(x=>x.SeatTable).FirstOrDefault(x => !x.isDeleted && x.Id == id);
+                var reservations = _easieRContext.Reservation.Include(x => x.ReservationType).ThenInclude(x=>x.Event).ThenInclude(x => x.Place).ThenInclude(x => x.Location).Include(x => x.User).Include(x=>x.SeatTableReservation).ThenInclude(x=>x.SeatTable).FirstOrDefault(x => !x.isDeleted && x.Id == id);
                 if (reservations == null)
                 {
                     throw new EntityNotFoundException(id, "Reservation");

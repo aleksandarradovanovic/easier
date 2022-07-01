@@ -51,10 +51,10 @@ namespace EasieR.Api.Controllers
             easieRContext.Event.AddRange(events);
 
             var reservations = fakeDbData.CreateReservationData();
-            reservations.ForEach(x => x.Event = events.First());
-            reservations.ForEach(x => x.Place = events.First().Place);
+            reservations.ForEach(x => x.ReservationType.Event = events.First());
+            reservations.ForEach(x => x.ReservationType.Event.Place = events.First().Place); ;
             reservations.ForEach(x => x.User = users.First());
-            reservations.ForEach(x => x.SeatTableReservation = x.Event.Place.SeatTables.Select( y =>
+            reservations.ForEach(x => x.SeatTableReservation = x.ReservationType.Event.Place.SeatTables.Select( y =>
             new SeatTableReservation
             {
                 SeatTable = y

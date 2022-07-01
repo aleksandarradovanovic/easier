@@ -24,6 +24,8 @@ namespace EasieR.Application.DataTransfer
         public DateTime EventStartTime { get; set; }
         public string EventDescription { get; set; }
         public byte[] QRCodeContent { get; set; }
+        public int ReservationTypeId { get; set; }
+        public ReservationTypeDto ReservationTypeDto { get; set; }
         public virtual ICollection<SeatTableDto> SeatTableDtos { get; set; }
 
     }

@@ -26,12 +26,12 @@ namespace EasieR.Implementation.Commands.ReservationCommand
         {
             try
             {
-                var reservations = _easieRContext.Reservation.Include(x => x.Event).Include(x => x.User).Include(x => x.Place).ThenInclude(x => x.Location).Include(x => x.SeatTableReservation).ThenInclude(x => x.SeatTable).AsQueryable().Where(x => !x.isDeleted);
+                var reservations = _easieRContext.Reservation.Include(x => x.ReservationType).ThenInclude(x=>x.Event).ThenInclude(x => x.Place).ThenInclude(x => x.Location).Include(x => x.User).Include(x => x.SeatTableReservation).ThenInclude(x => x.SeatTable).AsQueryable().Where(x => !x.isDeleted);
                 var skipCount = search.PerPage * (search.Page - 1);
                 if (search.Type != null)
                 {
                     search.Type = search.Type.ToLower();
-                    reservations = reservations.Where(x => x.Type.ToLower().Contains(search.Type));
+                    reservations = reservations.Where(x => x.ReservationType.Name.ToLower().Contains(search.Type));
                 }
                 if (search.NameOn != null)
                 {
@@ -46,17 +46,17 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                 if (search.PlaceName != null)
                 {
                     search.PlaceName = search.PlaceName.ToLower();
-                    reservations = reservations.Where(x => x.Place.Name.ToLower().Contains(search.PlaceName));
+                    reservations = reservations.Where(x => x.ReservationType.Event.Place.Name.ToLower().Contains(search.PlaceName));
                 }
                 if (search.PlaceType != null)
                 {
                     search.PlaceType = search.PlaceType.ToLower();
-                    reservations = reservations.Where(x => x.Place.Type.ToLower().Contains(search.PlaceType));
+                    reservations = reservations.Where(x => x.ReservationType.Event.Place.Type.ToLower().Contains(search.PlaceType));
                 }
                 if (search.EventName != null)
                 {
                     search.EventName = search.EventName.ToLower();
-                    reservations = reservations.Where(x => x.Event.Name.ToLower().Contains(search.EventName));
+                    reservations = reservations.Where(x => x.ReservationType.Event.Name.ToLower().Contains(search.EventName));
                 }
                 var response = new PagedResponse<ReservationDto>
                 {
@@ -67,24 +67,27 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                     {
                         Id = x.Id,
                         NameOn = x.NameOn,
-                        Type = x.Type,
-                        Remark = x.Remark,
                         Status = x.Status,
                         NumberOfGuests = x.NumberOfGuests,
-                        Price = x.Price,
-                        PlaceName = x.Place.Name,
-                        PlaceType = x.Place.Type,
-                        CompleteAddress = x.Place.Location.Country + ", " + x.Place.Location.City + ", " + x.Place.Location.StreetAndNumber,
+                        PlaceName = x.ReservationType.Event.Place.Name,
+                        PlaceType = x.ReservationType.Event.Place.Type,
+                        CompleteAddress = x.ReservationType.Event.Place.Location.Country + ", " + x.ReservationType.Event.Place.Location.City + ", " + x.ReservationType.Event.Place.Location.StreetAndNumber,
                         Username = x.User.UserName,
                         UserId = x.User.Id,
-                        EventName = x.Event.Name,
-                        EventDescription = x.Event.Description,
-                        EventStartTime = x.Event.StartTime,
+                        EventName = x.ReservationType.Event.Name,
+                        EventDescription = x.ReservationType.Event.Description,
+                        EventStartTime = x.ReservationType.Event.StartTime,
+                        ReservationTypeDto = new ReservationTypeDto { 
+                         Name = x.ReservationType.Name,
+                         Price = x.ReservationType.Price,
+                         Remark = x.ReservationType.Remark,
+                         MaxNumberOfGuests = x.ReservationType.MaxNumberOfGuests
+                        },
                         SeatTableDtos = x.SeatTableReservation.Select(y => new SeatTableDto
                         {
                             Number = y.SeatTable.Number
                         }).ToArray(),
-                        QRCodeContent = System.Text.Encoding.UTF8.GetBytes(x.NameOn + ";" + x.Event.Name)
+                        QRCodeContent = System.Text.Encoding.UTF8.GetBytes(x.NameOn + ";" + x.ReservationType.Event.Name)
                     })
 
 

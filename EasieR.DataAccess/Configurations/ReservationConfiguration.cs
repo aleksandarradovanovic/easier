@@ -14,23 +14,13 @@ namespace EasieR.DataAccess.Configurations
             builder.Property(x => x.NameOn)
                  .IsRequired()
                  .HasMaxLength(30);
-            builder.Property(x => x.Type)
-                 .IsRequired()
-                 .HasMaxLength(30);
-            builder.Property(x => x.Remark)
-                .IsRequired()
-                .HasMaxLength(100);
             builder.Property(x => x.Status)
                 .IsRequired()
                 .HasMaxLength(30);
             builder.Property(x => x.NumberOfGuests)
                  .IsRequired()
                  .HasMaxLength(10);
-            builder.Property(x => x.Price)
-                 .IsRequired();
-            builder.Property(x => x.PlaceId)
-                 .IsRequired();
-            builder.Property(x => x.EventId)
+            builder.Property(x => x.ReservationTypeId)
                  .IsRequired();
             builder.HasMany(s => s.SeatTableReservation).WithOne(r => r.Reservation).HasForeignKey(x => x.ReservationId).OnDelete(DeleteBehavior.Restrict);
 

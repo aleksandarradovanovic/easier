@@ -15,7 +15,8 @@ namespace EasieR.Application.DataTransfer
         public int PlaceId {get; set; }
         public string PlaceName { get; set; }
         public PlaceDto PlaceDto { get; set; }
-        public virtual ICollection<ReservationDto> ReservationDtos { get; set; }
+        public virtual ICollection<ReservationTypeDto> ReservationTypeDtos { get; set; } = new HashSet<ReservationTypeDto>();
+        public virtual ICollection<ReservationDto> ReservationDto { get; set; }
         public virtual ICollection<ImagesDto> ImagesDtos { get; set; }
         public virtual string Image { get; set; }
     }

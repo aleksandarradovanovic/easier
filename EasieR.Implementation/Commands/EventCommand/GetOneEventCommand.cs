@@ -29,7 +29,7 @@ namespace EasieR.Implementation.Commands.EventCommand
         {
             try
             {
-                var eventItem = _easieRContext.Event.Include(x=>x.Reservations).Include(x => x.Place).ThenInclude(x=>x.Location).FirstOrDefault(x => !x.isDeleted && x.Id == id);
+                var eventItem = _easieRContext.Event.Include(x=>x.ReservationTypes).Include(x => x.Place).ThenInclude(x=>x.Location).FirstOrDefault(x => !x.isDeleted && x.Id == id);
                 if (eventItem == null)
                 {
                     throw new EntityNotFoundException(id, "Event");

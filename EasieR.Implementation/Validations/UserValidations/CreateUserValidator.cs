@@ -18,9 +18,7 @@ namespace EasieR.Implementation.Validations.UserValidations
             RuleFor(x => x.LastName).NotEmpty().WithMessage("First name cannot be empty");
             RuleFor(x => x.DateOfBirth).NotEmpty().WithMessage("Date of birth cannot be empty");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Passowrd cannot be empty");
-            RuleFor(x => x.PasswordRepeat).NotEmpty().WithMessage("Passowrd repeat cannot be empty").Must((user, pass) => pass != user.Password).WithMessage("Passowrd and repeated passowrd are not the same");
-            RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("Phone cannot be empty");
-
+            RuleFor(x => x.PasswordRepeat).NotEmpty().WithMessage("Passowrd repeat cannot be empty").Must((user, pass) => pass == user.Password).WithMessage("Passowrd and repeated passowrd are not the same");
         }
     }
 }

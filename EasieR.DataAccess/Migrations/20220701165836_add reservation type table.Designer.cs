@@ -4,14 +4,16 @@ using EasieR.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasieR.DataAccess.Migrations
 {
     [DbContext(typeof(EasieRContext))]
-    partial class EasieRContextModelSnapshot : ModelSnapshot
+    [Migration("20220701165836_add reservation type table")]
+    partial class addreservationtypetable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1283,7 +1285,7 @@ namespace EasieR.DataAccess.Migrations
                     b.Property<int?>("ReservationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReservationTypeId")
+                    b.Property<int>("ReservationTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
@@ -1528,7 +1530,8 @@ namespace EasieR.DataAccess.Migrations
                     b.HasOne("EasieR.Domain.ReservationType", "ReservationType")
                         .WithMany("AvailableSeatTables")
                         .HasForeignKey("ReservationTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Place");
 

@@ -32,21 +32,17 @@ namespace EasieR.Implementation.Commands.ReservationCommand
         {
             try
             {
-                var reservationsForUpdate = _easieRContext.Reservation.Include(x => x.Event).Include(x => x.User).Include(x => x.Place).ThenInclude(x => x.Location).Include(x => x.SeatTableReservation).ThenInclude(x => x.SeatTable).FirstOrDefault(x => !x.isDeleted && x.Id == reservationDto.Id);
+                var reservationsForUpdate = _easieRContext.Reservation.Include(x => x.ReservationType).ThenInclude(x=>x.Event).ThenInclude(x => x.Place).ThenInclude(x => x.Location).Include(x => x.User).Include(x => x.SeatTableReservation).ThenInclude(x => x.SeatTable).FirstOrDefault(x => !x.isDeleted && x.Id == reservationDto.Id);
                 if (reservationsForUpdate == null)
                 {
                     throw new EntityNotFoundException(reservationDto.Id, "Reservation");
                 }
                 _validator.ValidateAndThrow(reservationDto);
-                reservationsForUpdate.Type = reservationDto.Type;
                 reservationsForUpdate.NameOn = reservationDto.NameOn;
                 reservationsForUpdate.UserId = reservationDto.UserId;
-                reservationsForUpdate.Remark = reservationDto.Remark;
                 reservationsForUpdate.Status = reservationDto.Status;
                 reservationsForUpdate.NumberOfGuests = reservationDto.NumberOfGuests;
-                reservationsForUpdate.Price = reservationDto.Price;
-                reservationsForUpdate.PlaceId = reservationDto.PlaceId;
-                reservationsForUpdate.EventId = reservationDto.EventId;
+                reservationsForUpdate.ReservationTypeId = reservationDto.ReservationTypeId;
                 if (reservationDto.SeatTableDtos != null && reservationDto.SeatTableDtos.Count > 0)
                 {
                     reservationsForUpdate.SeatTableReservation = reservationDto.SeatTableDtos.Select(x => new SeatTableReservation

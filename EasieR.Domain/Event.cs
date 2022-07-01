@@ -14,7 +14,7 @@ namespace EasieR.Domain
         public int PlaceId { get; set; }
         
         public Place Place { get; set; }
-        public virtual ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
+        public virtual ICollection<ReservationType> ReservationTypes { get; set; } = new HashSet<ReservationType>();
         public ICollection<Images> EventImages { get; set; }
 
     }

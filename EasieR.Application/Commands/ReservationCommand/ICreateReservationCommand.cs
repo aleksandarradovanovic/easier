@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EasieR.Application.Commands.ReservationCommand
 {
-    public interface ICreateReservationCommand : ICommand<ReservationDto>
+    public interface ICreateReservationCommand : ICommand<ReservationDtos>
     {
     }
 }

@@ -26,33 +26,35 @@ namespace EasieR.Implementation.Commands.ReservationCommand
 
         public string Name => RolesConstants.CreateReservation;
 
-        public void Execute(ReservationDto reservationDto)
+        public void Execute(ReservationDtos reservationDtos)
         {
-            {
                 try
                 {
-                    _validator.ValidateAndThrow(reservationDto);
-                    var reservation = new Reservation
+                    if(reservationDtos != null && reservationDtos.Reservations != null && reservationDtos.Reservations.Count > 0)
                     {
-                        Type = reservationDto.Type,
-                        NameOn = reservationDto.NameOn,
-                        UserId = reservationDto.UserId,
-                        Remark = reservationDto.Remark,
-                        Status = reservationDto.Status,
-                        NumberOfGuests = reservationDto.NumberOfGuests,
-                        Price = reservationDto.Price,
-                        PlaceId = reservationDto.PlaceId,
-                        EventId = reservationDto.EventId
-                    };
-                    if (reservationDto.SeatTableDtos != null && reservationDto.SeatTableDtos.Count > 0)
-                    {
-                        reservation.SeatTableReservation = reservationDto.SeatTableDtos.Select(x => new SeatTableReservation
+                        foreach (var reservationDto in reservationDtos.Reservations)
                         {
-                            SeatTableId = x.Id
-                        }).ToArray();
+                            _validator.ValidateAndThrow(reservationDto);
+                            var reservation = new Reservation
+                            {
+                                NameOn = reservationDto.NameOn,
+                                UserId = reservationDto.UserId,
+                                Status = reservationDto.Status,
+                                NumberOfGuests = reservationDto.NumberOfGuests,
+                                ReservationTypeId = reservationDto.ReservationTypeId
+                            };
+                            if (reservationDto.SeatTableDtos != null && reservationDto.SeatTableDtos.Count > 0)
+                            {
+                                reservation.SeatTableReservation = reservationDto.SeatTableDtos.Select(x => new SeatTableReservation
+                                {
+                                    SeatTableId = x.Id
+                                }).ToArray();
+                            }
+                            _easieRContext.Add(reservation);
+                            _easieRContext.SaveChanges();
+                        }
                     }
-                    _easieRContext.Add(reservation);
-                    _easieRContext.SaveChanges();
+   
                 }
                 catch (Exception ex)
                 {
@@ -61,6 +63,6 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                 }
 
             }
-        }
+        
     }
 }
