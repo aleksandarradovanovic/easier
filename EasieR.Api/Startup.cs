@@ -175,7 +175,7 @@ namespace EasieR.Api
             });
 
 
-            services.AddAutoMapper(typeof(RoleProfile), typeof(UserProfile), typeof(LocationProfile), typeof(PlaceProfile), typeof(EventProfile), typeof(SeatTableProfile), typeof(ImageProfile), typeof(ReservationProfile), typeof(ReservationTypeProfile));
+            services.AddAutoMapper(typeof(RoleProfile), typeof(UserProfile), typeof(LocationProfile), typeof(PlaceProfile), typeof(EventProfile), typeof(SeatTableProfile), typeof(ImageProfile), typeof(ReservationProfile), typeof(ReservationTypeProfile), typeof(ReservationTypeSeatTableProfile));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

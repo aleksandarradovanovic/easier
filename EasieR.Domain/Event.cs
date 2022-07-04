@@ -12,7 +12,7 @@ namespace EasieR.Domain
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int PlaceId { get; set; }
-        
+        public string EventPlaceMap { get; set; }
         public Place Place { get; set; }
         public virtual ICollection<ReservationType> ReservationTypes { get; set; } = new HashSet<ReservationType>();
         public ICollection<Images> EventImages { get; set; }

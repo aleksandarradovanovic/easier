@@ -39,7 +39,7 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                             {
                                 NameOn = reservationDto.NameOn,
                                 UserId = reservationDto.UserId,
-                                Status = reservationDto.Status,
+                                Status = "CREATED",
                                 NumberOfGuests = reservationDto.NumberOfGuests,
                                 ReservationTypeId = reservationDto.ReservationTypeId
                             };

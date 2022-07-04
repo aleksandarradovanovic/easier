@@ -17,6 +17,7 @@ namespace EasieR.DataAccess.Configurations
                 .IsRequired();
             builder.Property(x => x.isAvailable).HasDefaultValue(true);
             builder.Property(x => x.PlaceId).IsRequired();
+            builder.HasMany(s => s.SeatTableReservationTypes).WithOne(s => s.SeatTable).HasForeignKey(x => x.SeatTableId).OnDelete(DeleteBehavior.Restrict);
             builder.HasMany(s => s.SeatTableReservation).WithOne(s => s.SeatTable).HasForeignKey(x => x.SeatTableId).OnDelete(DeleteBehavior.Restrict);
 
         }

@@ -19,7 +19,7 @@ namespace EasieR.DataAccess.Configurations
             builder.Property(x => x.EventId)
                  .IsRequired();
             builder.HasMany(s => s.Reservations).WithOne(r => r.ReservationType).HasForeignKey(x => x.ReservationTypeId).OnDelete(DeleteBehavior.Restrict);
-            builder.HasMany(s => s.AvailableSeatTables).WithOne(r => r.ReservationType).HasForeignKey(x => x.ReservationTypeId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(s => s.SeatTableReservationTypes).WithOne(r => r.ReservationType).HasForeignKey(x => x.ReservationTypeId).OnDelete(DeleteBehavior.Restrict);
 
 
         }

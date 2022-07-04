@@ -4,14 +4,16 @@ using EasieR.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasieR.DataAccess.Migrations
 {
     [DbContext(typeof(EasieRContext))]
-    partial class EasieRContextModelSnapshot : ModelSnapshot
+    [Migration("20220702115253_reservation type seat tables table")]
+    partial class reservationtypeseattablestable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -630,9 +632,6 @@ namespace EasieR.DataAccess.Migrations
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("EventPlaceMap")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
@@ -1574,7 +1573,7 @@ namespace EasieR.DataAccess.Migrations
             modelBuilder.Entity("EasieR.Domain.SeatTableReservationType", b =>
                 {
                     b.HasOne("EasieR.Domain.ReservationType", "ReservationType")
-                        .WithMany("SeatTableReservationTypes")
+                        .WithMany("AvailableSeatTables")
                         .HasForeignKey("ReservationTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1633,9 +1632,9 @@ namespace EasieR.DataAccess.Migrations
 
             modelBuilder.Entity("EasieR.Domain.ReservationType", b =>
                 {
-                    b.Navigation("Reservations");
+                    b.Navigation("AvailableSeatTables");
 
-                    b.Navigation("SeatTableReservationTypes");
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("EasieR.Domain.Roles", b =>

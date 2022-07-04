@@ -12,7 +12,7 @@ namespace EasieR.Domain
         public int EventId { get; set; }
         public Event Event { get; set; }
         public int MaxNumberOfGuests { get; set; }
-        public ICollection<SeatTable> AvailableSeatTables { get; set; } = new HashSet<SeatTable>();
+        public ICollection<SeatTableReservationType> SeatTableReservationTypes { get; set; } = new HashSet<SeatTableReservationType>();
         public ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
 
 

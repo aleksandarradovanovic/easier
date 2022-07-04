@@ -13,8 +13,7 @@ namespace EasieR.Implementation.Validations.ReservationValidations
         public CreateReservationValidator(EasieRContext context)
         {
             RuleFor(x => x.NameOn).NotEmpty();
-            RuleFor(x => x.Type).NotEmpty();
-            RuleFor(x => x.UserId).NotEmpty();
+            RuleFor(x => x.ReservationTypeId).NotEmpty();
 
         }
     }

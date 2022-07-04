@@ -11,9 +11,11 @@ namespace EasieR.Implementation.Mappers
     {
         public ReservationTypeProfile()
         {
-            CreateMap<ReservationTypeDto, ReservationType>();
-
-            CreateMap<ReservationType, ReservationTypeDto>();
+            CreateMap<ReservationTypeDto, ReservationType>()
+            .ForMember(dest => dest.SeatTableReservationTypes, opt => opt.MapFrom(src => src.AvailableSeatTablesDto));
+            CreateMap<ReservationType, ReservationTypeDto>()
+            .ForMember(dest => dest.AvailableSeatTablesDto, opt => opt.MapFrom(src => src.SeatTableReservationTypes));
+            ;
         }
     }
 }

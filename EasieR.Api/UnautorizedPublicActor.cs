@@ -27,7 +27,8 @@ namespace EasieR.Api
         public IEnumerable<string> AllowedUsecases => new string[] { 
         DataConstants.CreateUser,
         DataConstants.SearchEvent,
-        DataConstants.GetOneEvent
+        DataConstants.GetOneEvent,
+        DataConstants.CreateReservation
         };
     }
 }

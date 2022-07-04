@@ -12,6 +12,7 @@ namespace EasieR.Application.DataTransfer
         public string Description { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public string EventPlaceMap { get; set; }
         public int PlaceId {get; set; }
         public string PlaceName { get; set; }
         public PlaceDto PlaceDto { get; set; }

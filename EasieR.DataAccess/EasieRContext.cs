@@ -24,6 +24,7 @@ namespace EasieR.DataAccess
 
             modelBuilder.Entity<ActorRoles>().HasKey(x => new { x.ActorId, x.RoleId });
             modelBuilder.Entity<SeatTableReservation>().HasKey(x => new { x.ReservationId, x.SeatTableId });
+            modelBuilder.Entity<SeatTableReservationType>().HasKey(x => new { x.ReservationTypeId, x.SeatTableId });
             modelBuilder.Entity<Actor>().HasData(InitData.CreateActors());
             modelBuilder.Entity<Roles>().HasData(InitData.CreateRoles());
             modelBuilder.Entity<ActorRoles>().HasData(InitData.CreateActorRoles());

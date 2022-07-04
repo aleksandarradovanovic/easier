@@ -9,6 +9,7 @@ using Nedelja7.Application.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using EasieR.Application.Constants;
+using EasieR.Domain;
 
 namespace EasieR.Implementation.Commands.EventCommand
 {
@@ -29,7 +30,7 @@ namespace EasieR.Implementation.Commands.EventCommand
         {
             try
             {
-                var eventItem = _easieRContext.Event.Include(x=>x.ReservationTypes).Include(x => x.Place).ThenInclude(x=>x.Location).FirstOrDefault(x => !x.isDeleted && x.Id == id);
+                var eventItem = _easieRContext.Event.Include(x=>x.ReservationTypes).ThenInclude(t => (t as ReservationType).SeatTableReservationTypes).ThenInclude(x=> (x as SeatTableReservationType).SeatTable).Include(x => x.Place).ThenInclude(x=>x.Location).FirstOrDefault(x => !x.isDeleted && x.Id == id);
                 if (eventItem == null)
                 {
                     throw new EntityNotFoundException(id, "Event");
