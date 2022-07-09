@@ -3,11 +3,13 @@ using EasieR.Application.Constants;
 using EasieR.Application.DataTransfer;
 using EasieR.DataAccess;
 using EasieR.Domain;
+using EasieR.Implementation.Crypt;
 using EasieR.Implementation.Validations.ReservationValidations;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace EasieR.Implementation.Commands.ReservationCommand
@@ -50,6 +52,10 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                                     SeatTableId = x.Id
                                 }).ToArray();
                             }
+                        reservation.ReservationSequence = new ReservationSequence
+                        {
+                            PrivateKey = CryptUtil.RandomString(32)
+                        };
                             _easieRContext.Add(reservation);
                             _easieRContext.SaveChanges();
                         }

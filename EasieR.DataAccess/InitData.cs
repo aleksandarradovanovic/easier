@@ -189,6 +189,11 @@ namespace EasieR.DataAccess
                     Id = 30,
                     Name = DataConstants.DeleteReservation
                  },
+                    new Roles
+                 {
+                    Id = 301,
+                    Name = DataConstants.ValidateReservation
+                 },
                   new Roles
                  {
                     Id = 31,
@@ -339,6 +344,9 @@ namespace EasieR.DataAccess
                         returnActorRoleRole(DataConstants.DeleteReservation, DataConstants.publicActor),
                         returnActorRoleRole(DataConstants.DeleteReservation, DataConstants.placeActor),
                         returnActorRoleRole(DataConstants.DeleteReservation, DataConstants.publicUnautorizedActor),
+
+                        returnActorRoleRole(DataConstants.ValidateReservation, DataConstants.adminActor),
+                        returnActorRoleRole(DataConstants.ValidateReservation, DataConstants.placeActor),
 
                         returnActorRoleRole(DataConstants.GetAuditLogs, DataConstants.adminActor),
 

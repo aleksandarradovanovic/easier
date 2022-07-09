@@ -31,7 +31,7 @@ namespace EasieR.Implementation.Commands.PlaceCommand
         {
             try
             {
-                var place = _easieRContext.Place.Include(x => x.Location).Include(x=>x.Events).Include(x => x.SeatTables)
+                var place = _easieRContext.Place.Include(x => x.Location).Include(x=>x.Events).Include(x => x.SeatTables).Include(x=>x.Images).Include(x=>x.Staff).Include(x=>x.Events)
                     .FirstOrDefault(x => !x.isDeleted && x.Id == id);
                 if (place == null)
                 {

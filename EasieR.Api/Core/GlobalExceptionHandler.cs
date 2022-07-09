@@ -47,6 +47,13 @@ namespace Nedelja7.Api.Core
                             message = ex.Message
                         };
                         break;
+                    case GeneralErrorException _:
+                        statusCode = StatusCodes.Status412PreconditionFailed;
+                        response = new
+                        {
+                            message = ex.Message
+                        };
+                        break;
                     case BadRequestException _:
                         statusCode = StatusCodes.Status400BadRequest;
                         response = new

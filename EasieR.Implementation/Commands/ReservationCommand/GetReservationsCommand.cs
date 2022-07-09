@@ -86,8 +86,7 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                         SeatTableDtos = x.SeatTableReservation.Select(y => new SeatTableDto
                         {
                             Number = y.SeatTable.Number
-                        }).ToArray(),
-                        QRCodeContent = System.Text.Encoding.UTF8.GetBytes(x.NameOn + ";" + x.ReservationType.Event.Name)
+                        }).ToArray()
                     })
 
 

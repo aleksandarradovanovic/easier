@@ -35,6 +35,13 @@ namespace EasieR.Api.Controllers
         {
             return Ok(executor.ExecuteQuery(query, id));
         }
+        // GET: api/Reservation/validate
+        [HttpPost("validate")]
+        public IActionResult Validate([FromBody] ReservationValidationRo reservationValidationRo, [FromServices] IValidateReservationCommand command, [FromServices] IGetOneReservationQuery query)
+        {
+            executor.ExecuteCommand(command, reservationValidationRo);
+            return Ok(executor.ExecuteQuery(query, reservationValidationRo.Id));
+        }
 
         // POST: api/Reservation
         [HttpPost]

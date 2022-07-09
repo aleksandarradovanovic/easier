@@ -18,10 +18,12 @@ namespace EasieR.Implementation.Mappers
                  .ForMember(dest => dest.ImagesDtos, opt => opt.MapFrom(src => src.Images))
                  .ForMember(dest => dest.ImagesCount, opt => opt.MapFrom(src => src.Images.Count))
                  .ForMember(dest => dest.SeatTableDtos, opt => opt.MapFrom(src => src.SeatTables))
-                  .ForMember(dest => dest.ImagesCount, opt => opt.MapFrom(src => src.SeatTables.Count))
+                  .ForMember(dest => dest.SeatTablesCount, opt => opt.MapFrom(src => src.SeatTables.Count))
 
                  .ForMember(dest => dest.EventsDto, opt => opt.MapFrom(src => src.Events))
-                  .ForMember(dest => dest.EventsCount, opt => opt.MapFrom(src => src.Events.Count));
+                 .ForMember(dest => dest.EventsCount, opt => opt.MapFrom(src => src.Events.Count))
+                 .ForMember(dest => dest.StaffCount, opt => opt.MapFrom(src => src.Staff.Count));
+
             CreateMap<PlaceDto, Place>()
                 .ForMember(dest => dest.Location,
                 opt => opt.MapFrom(src => src.LocationDto)

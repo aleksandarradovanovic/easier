@@ -16,6 +16,7 @@ namespace EasieR.Application.DataTransfer
         public string PasswordRepeat { get; set; }
         public string Status { get; set; }
         public string PhoneNumber { get; set; }
+        public string Position { get; set; }
         public int PlaceId { get; set; }
         public int ActorId { get; set; }
         public string ActorName { get; set; }

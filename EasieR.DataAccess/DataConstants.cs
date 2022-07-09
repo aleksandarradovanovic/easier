@@ -44,6 +44,7 @@ namespace EasieR.DataAccess
             public const string SearchReservation = "SEARCH_RESERVATION";
             public const string UpdateReservation = "UPDATE_RESERVATION";
             public const string DeleteReservation = "DELETE_RESERVATION";
+            public const string ValidateReservation = "VALIDATE_RESERVATION";
 
             public const string GetAuditLogs = "GET_AUDIT_LOGS";
 

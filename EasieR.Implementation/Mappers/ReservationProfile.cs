@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using EasieR.Implementation.Crypt;
 namespace EasieR.Implementation.Mappers
 {
     public class ReservationProfile : Profile
@@ -16,7 +16,9 @@ namespace EasieR.Implementation.Mappers
                  .ForMember(dest => dest.SeatTableReservation, opt => opt.MapFrom(src => src.SeatTableDtos.Select(x => new SeatTableReservation
                  {
                      SeatTableId = x.Id
-                 })));
+                 })))
+                 .ForMember(dest=>dest.ReservationSequence, opt => opt.MapFrom(src=> new ReservationSequence { PrivateKey = Enumerable.Range(0, 100).Select(n => n * 2).ToString() + DateTime.Now.ToString()
+                 }));
             CreateMap<Reservation, ReservationDto>()
             .ForMember(dest=>dest.ReservationTypeDto, opt =>opt.MapFrom(src=>src.ReservationType))
             .ForMember(dest => dest.PlaceName, opt => opt.MapFrom(src => src.ReservationType.Event.Place.Name))
@@ -29,7 +31,12 @@ namespace EasieR.Implementation.Mappers
             {
                 Number = x.SeatTable.Number
             })))
-            .ForMember(dest=> dest.QRCodeContent, opt=>opt.MapFrom(src => System.Text.Encoding.UTF8.GetBytes(src.NameOn + ";" + src.ReservationType.Event.Name)));
+            .ForMember(dest=> dest.QRCodeContent, opt=>opt.MapFrom(src => CryptUtil.EncryptStringNew(
+                  src.Id + ";"
+                + src.ReservationType.Event.Id + ";"
+                + src.User.Id + ";"
+                + src.NameOn
+                , src.ReservationSequence.PrivateKey)));
             
         }
     }

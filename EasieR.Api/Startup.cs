@@ -119,6 +119,7 @@ namespace EasieR.Api
             services.AddTransient<ICreateReservationCommand, CreateReservationCommand>();
             services.AddTransient<IUpdateReservationCommand, UpdateReservationCommand>();
             services.AddTransient<IDeleteReservationCommand, DeleteReservationCommand>();
+            services.AddTransient<IValidateReservationCommand, ValidateReservationCommand>();
             services.AddTransient<IGetOneReservationQuery, GetOneReservationCommand>();
             services.AddTransient<IGetReservationsQuery, GetReservationsCommand>();
 
