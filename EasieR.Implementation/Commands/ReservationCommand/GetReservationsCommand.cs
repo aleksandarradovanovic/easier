@@ -33,6 +33,10 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                     search.Type = search.Type.ToLower();
                     reservations = reservations.Where(x => x.ReservationType.Name.ToLower().Contains(search.Type));
                 }
+                if (search.UserId != 0)
+                {
+                    reservations = reservations.Where(x => x.UserId == search.UserId);
+                }
                 if (search.NameOn != null)
                 {
                     search.NameOn = search.NameOn.ToLower();

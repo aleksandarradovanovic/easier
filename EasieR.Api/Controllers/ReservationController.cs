@@ -17,15 +17,25 @@ namespace EasieR.Api.Controllers
     public class ReservationController : ControllerBase
     {
         private readonly UseCasesExecutor executor;
+        private readonly IApplicationActor actor;
 
-        public ReservationController(UseCasesExecutor executor)
+        public ReservationController(UseCasesExecutor executor, IApplicationActor actor)
         {
             this.executor = executor;
+            this.actor = actor;
+
         }
         // GET: api/Reservation
         [HttpGet]
         public IActionResult Get([FromQuery] ReservationSearch search, [FromServices] IGetReservationsQuery query)
         {
+            return Ok(executor.ExecuteQuery(query, search));
+        }
+        // GET: api/Reservation
+        [HttpGet("user")]
+        public IActionResult GetForUser([FromQuery] ReservationSearch search, [FromServices] IGetReservationsQuery query)
+        {
+            search.UserId = actor.Id;
             return Ok(executor.ExecuteQuery(query, search));
         }
 
