@@ -4,14 +4,15 @@ using EasieR.Application.DataTransfer;
 using EasieR.DataAccess;
 using EasieR.Domain;
 using EasieR.Implementation.Crypt;
+using EasieR.Implementation.Email;
 using EasieR.Implementation.Validations.ReservationValidations;
 using FluentValidation;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-
 namespace EasieR.Implementation.Commands.ReservationCommand
 {
     public class CreateReservationCommand : ICreateReservationCommand
@@ -49,13 +50,19 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                             {
                                 reservation.SeatTableReservation = reservationDto.SeatTableDtos.Select(x => new SeatTableReservation
                                 {
-                                    SeatTableId = x.Id
+                                    SeatTableId = x.Id,
+                                    
+                                    
+                     
                                 }).ToArray();
-                            }
+                        }
                         reservation.ReservationSequence = new ReservationSequence
                         {
                             PrivateKey = CryptUtil.RandomString(32)
                         };
+
+                     //   EmailService emailService = new EmailService();
+       // emailService.Send("acaca93@gmail.com", "radovanovica1993@gmail.com", "email", "text");
                             _easieRContext.Add(reservation);
                             _easieRContext.SaveChanges();
                         }

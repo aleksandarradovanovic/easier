@@ -13,5 +13,7 @@ namespace EasieR.Application.SearchData
         public string PlaceName { get; set; }
         public string PlaceType { get; set; }
         public string EventName { get; set; }
+        public int EventId { get; set; }
+
     }
 }

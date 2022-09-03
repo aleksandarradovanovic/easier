@@ -41,6 +41,7 @@ namespace EasieR.Implementation.Commands.AuditLogCommand
                     search.UserIdentity = search.UserIdentity.ToLower();
                     logs = logs.Where(x => x.UserIdentity.ToLower().Contains(search.UserIdentity));
                 }
+                //logs = logs.OrderByDescending(x => x.CommandAt);
                 var skipCount = search.PerPage * (search.Page - 1);
                 var response = new PagedResponse<AuditLogDto>
                 {
@@ -54,7 +55,8 @@ namespace EasieR.Implementation.Commands.AuditLogCommand
                         UserId = (int)x.UserId,
                         UserIdentity = x.UserIdentity,
                         IsRequestSuccess = x.IsRequestSuccess,
-                        Comment = x.Comment
+                        Comment = x.Comment,
+                        CommandAt = x.CommandAt
 
                     })
                 };

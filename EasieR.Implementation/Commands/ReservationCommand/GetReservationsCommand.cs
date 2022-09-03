@@ -62,6 +62,11 @@ namespace EasieR.Implementation.Commands.ReservationCommand
                     search.EventName = search.EventName.ToLower();
                     reservations = reservations.Where(x => x.ReservationType.Event.Name.ToLower().Contains(search.EventName));
                 }
+                if (search.EventId != 0)
+                {
+                    reservations = reservations.Where(x => x.ReservationType.Event.Id == search.EventId);
+                }
+                reservations = reservations.OrderByDescending(x => x.CreatedAt);
                 var response = new PagedResponse<ReservationDto>
                 {
                     CurrentPage = search.Page,

@@ -3,6 +3,7 @@ using EasieR.Application.DataTransfer;
 using EasieR.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EasieR.Implementation.Mappers

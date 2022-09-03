@@ -32,6 +32,7 @@ using EasieR.Implementation.Commands.ReservationCommand;
 using EasieR.Implementation.Commands.RolesCommand;
 using EasieR.Implementation.Commands.SeatTableCommand;
 using EasieR.Implementation.Commands.UserCommand;
+using EasieR.Implementation.Email;
 using EasieR.Implementation.Mappers;
 using EasieR.Implementation.Validations;
 using EasieR.Implementation.Validations.EventValidations;
@@ -178,6 +179,15 @@ namespace EasieR.Api
 
             services.AddAutoMapper(typeof(RoleProfile), typeof(UserProfile), typeof(LocationProfile), typeof(PlaceProfile), typeof(EventProfile), typeof(SeatTableProfile), typeof(ImageProfile), typeof(ReservationProfile), typeof(ReservationTypeProfile), typeof(ReservationTypeSeatTableProfile));
 
+            services.Configure<MailKitEmailSenderOptions>(options =>
+            {
+                options.Host_Address = Configuration["ExternalProviders:MailKit:SMTP:Address"];
+                options.Host_Port = Convert.ToInt32(Configuration["ExternalProviders:MailKit:SMTP:Port"]);
+                options.Host_Username = Configuration["ExternalProviders:MailKit:SMTP:Account"];
+                options.Host_Password = Configuration["ExternalProviders:MailKit:SMTP:Password"];
+                options.Sender_EMail = Configuration["ExternalProviders:MailKit:SMTP:SenderEmail"];
+                options.Sender_Name = Configuration["ExternalProviders:MailKit:SMTP:SenderName"];
+            });
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {

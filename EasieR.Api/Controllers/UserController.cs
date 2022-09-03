@@ -60,7 +60,7 @@ namespace EasieR.Api.Controllers
         {
             userDto.Id = id;
             executor.ExecuteCommand(command, userDto);
-            return Ok();
+            return StatusCode(201, new { message = "User updated." });
         }
 
         // DELETE: api/ApiWithActions/5

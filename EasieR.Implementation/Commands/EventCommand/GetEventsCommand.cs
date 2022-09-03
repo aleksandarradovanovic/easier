@@ -79,6 +79,8 @@ namespace EasieR.Implementation.Commands.EventCommand
                     search.City = search.City.ToLower();
                     eventItem = eventItem.Where(x => x.Place.Location.City.ToLower().Contains(search.City));
                 }
+                eventItem = eventItem.OrderBy(x => x.StartTime);
+
                 var skipCount = search.PerPage * (search.Page - 1);
                 var response = new PagedResponse<EventDto>
                 {
